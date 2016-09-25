@@ -11,6 +11,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Threading;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
+using Accord.Math;
 
 namespace DrawCharts
 {
