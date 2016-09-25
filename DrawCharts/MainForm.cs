@@ -11,7 +11,6 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Threading;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
-using Accord.Math;
 
 namespace DrawCharts
 {
@@ -127,7 +126,6 @@ namespace DrawCharts
             for (int i = 0; i<result.Phi.Length; i++)
             {
                 double t = t0 + result.h*i;
-                //chart1.Series[0].Points.AddXY(t, result.Phi[i]);
                 structure.time[i] = t;
                 structure.dFunction[i] = result.Phi1[i];
                 structure.fucntion[i] = result.Phi[i];
@@ -137,36 +135,12 @@ namespace DrawCharts
 
                 structure.bigFunction[i] = Abig * Math.Exp(omega * t) + Bbig * Math.Exp(-omega * t);
                 structure.dBigFunction[i] = Abig * omega * Math.Exp(omega * t) - Bbig * omega * Math.Exp(-omega * t);
-
-                //structure.bigFunction[i] = 2 * Math.Cosh(omega * t + Math.PI / 2);
-                //structure.dBigFunction[i] = 2 * omega *  Math.Sinh(omega * t + Math.PI / 2);
-
-                //chart1.Series[0].Points.AddXY(structure.fucntion[i], structure.dFunction[i]);
-                //chart1.Series[1].Points.AddXY(structure.smallFunction[i], structure.dSmallFunction[i]);
             }
 
             chart1.ChartAreas[0].Axes[0].Maximum = result.Phi.Max();
             chart1.ChartAreas[0].Axes[1].Maximum = result.Phi1.Max()+1;
 
-            chart1.Series[0].Points.Clear();
-            chart1.Series[1].Points.Clear();
-
-
-            timer1.Enabled = true;
-
-            //DrawPhasePortrait(result);           
-        }
-
-        private void DrawPhasePortrait(Result result)
-        {
-            //Series tmp = new Series();
-            //tmp.ChartType = SeriesChartType.FastLine;
-            //chart1.Series.Clear();
-            //chart1.Series.Add(tmp); 
-            for(int i = 0; i<result.Phi.Length;i++)
-            {
-                chart1.Series[0].Points.AddXY(result.Phi[i], result.Phi1[i]);
-            }
+            timer1.Enabled = true;          
         }
 
         private void timer1_Tick(object sender, EventArgs e)
